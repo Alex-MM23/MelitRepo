@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20240403151302"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "tipoPago",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "total",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "Venta",
+  "relationships": [
+    {
+      "otherEntityName": "empleado",
+      "otherEntityRelationshipName": "venta",
+      "relationshipName": "empleado",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "cliente",
+      "otherEntityRelationshipName": "venta",
+      "relationshipName": "cliente",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "id": false,
+      "otherEntityField": "id",
+      "otherEntityName": "coche",
+      "otherEntityRelationshipName": "venta",
+      "relationshipName": "id_coche",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

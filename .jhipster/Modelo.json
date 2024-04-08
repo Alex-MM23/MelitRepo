@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240404110005"
+  },
+  "dto": "no",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Modelo",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "marca",
+      "otherEntityRelationshipName": "modelo",
+      "relationshipName": "marca",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,19 @@
+{
+  "annotations": {
+    "changelogDate": "20240404093108"
+  },
+  "dto": "no",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Marca",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

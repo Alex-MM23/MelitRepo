@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20240403151303"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "color",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numeroSerie",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "precio",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "exposicion",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "nPuertas",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Coche",
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "marca",
+      "otherEntityRelationshipName": "marca",
+      "relationshipName": "marca",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "modelo",
+      "otherEntityRelationshipName": "coche",
+      "relationshipName": "modelo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,30 @@
+{
+  "appApp": {
+    "coche": {
+      "home": {
+        "title": "Coches",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Coche",
+        "createOrEditLabel": "Crear o editar Coche",
+        "notFound": "Ningún Coches encontrado"
+      },
+      "created": "Un nuevo Coche ha sido creado con el identificador {{ param }}",
+      "updated": "Un Coche ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Coche ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Coche {{ id }}?"
+      },
+      "detail": {
+        "title": "Coche"
+      },
+      "id": "ID",
+      "color": "Color",
+      "numeroSerie": "Numero Serie",
+      "precio": "Precio",
+      "exposicion": "Exposicion",
+      "marca": "Marca",
+      "modelo": "Modelo",
+      "venta": "Venta"
+    }
+  }
+}

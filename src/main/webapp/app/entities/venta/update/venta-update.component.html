@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-venta-heading" data-cy="VentaCreateUpdateHeading" jhiTranslate="appApp.venta.home.createOrEditLabel">
+        Crear o editar Venta
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.venta.fecha" for="field_fecha">Fecha</label>
+          <div class="input-group">
+            <input
+              id="field_fecha"
+              data-cy="fecha"
+              type="text"
+              class="form-control"
+              name="fecha"
+              ngbDatepicker
+              #fechaDp="ngbDatepicker"
+              formControlName="fecha"
+            />
+            <button type="button" class="btn btn-secondary" (click)="fechaDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.venta.tipoPago" for="field_tipoPago">Tipo Pago</label>
+          <input type="text" class="form-control" name="tipoPago" id="field_tipoPago" data-cy="tipoPago" formControlName="tipoPago" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.venta.total" for="field_total">Total</label>
+          <input type="number" class="form-control" name="total" id="field_total" data-cy="total" formControlName="total" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.venta.empleado" for="field_empleado">Empleado</label>
+          <select
+            class="form-control"
+            id="field_empleado"
+            data-cy="empleado"
+            name="empleado"
+            formControlName="empleado"
+            [compareWith]="compareEmpleado"
+          >
+            <option [ngValue]="null"></option>
+            @for (empleadoOption of empleadosSharedCollection; track $index) {
+              <option [ngValue]="empleadoOption">{{ empleadoOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.venta.cliente" for="field_cliente">Cliente</label>
+          <select
+            class="form-control"
+            id="field_cliente"
+            data-cy="cliente"
+            name="cliente"
+            formControlName="cliente"
+            [compareWith]="compareCliente"
+          >
+            <option [ngValue]="null"></option>
+            @for (clienteOption of clientesSharedCollection; track $index) {
+              <option [ngValue]="clienteOption">{{ clienteOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.venta.id_coche" for="field_id_coche">Id Coche</label>
+          <select
+            class="form-control"
+            id="field_id_coche"
+            data-cy="id_coche"
+            name="id_coche"
+            formControlName="id_coche"
+            [compareWith]="compareCoche"
+          >
+            <option [ngValue]="null"></option>
+            @for (cocheOption of id_cochesCollection; track $index) {
+              <option [ngValue]="cocheOption">{{ cocheOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

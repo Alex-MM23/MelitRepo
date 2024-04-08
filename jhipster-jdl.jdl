@@ -1,0 +1,40 @@
+relationship OneToOne{
+Venta to Coche
+}
+
+relationship ManyToOne{
+Venta to Empleado
+}
+
+relationship ManyToOne{
+Venta to Cliente
+}
+
+entity Venta{
+fecha LocalDate
+tipoPago String
+total Double
+}
+
+entity Coche{
+marca String
+modelo String
+color String
+numeroSerie String
+precio Double
+exposicion Boolean
+}
+
+entity Empleado{
+dni String
+nombre String
+activo Boolean
+numeroVentas Integer
+}
+
+entity Cliente{
+dni String
+nombre String
+numeroCompras Integer
+tier Integer
+}

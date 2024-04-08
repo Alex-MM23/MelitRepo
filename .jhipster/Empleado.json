@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20240403151304"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "dni",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "activo",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "numeroVentas",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Empleado",
+  "relationships": [
+    {
+      "otherEntityName": "venta",
+      "otherEntityRelationshipName": "empleado",
+      "relationshipName": "venta",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

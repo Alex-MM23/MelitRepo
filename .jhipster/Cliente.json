@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20240403151305"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "dni",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numeroCompras",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "tier",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Cliente",
+  "relationships": [
+    {
+      "otherEntityName": "venta",
+      "otherEntityRelationshipName": "cliente",
+      "relationshipName": "venta",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

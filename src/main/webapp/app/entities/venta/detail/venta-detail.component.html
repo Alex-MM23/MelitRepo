@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (venta) {
+      <div>
+        <h2 data-cy="ventaDetailsHeading"><span jhiTranslate="appApp.venta.detail.title">Venta</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ venta.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="appApp.venta.fecha">Fecha</span></dt>
+          <dd>
+            <span>{{ venta.fecha | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="appApp.venta.tipoPago">Tipo Pago</span></dt>
+          <dd>
+            <span>{{ venta.tipoPago }}</span>
+          </dd>
+          <dt><span jhiTranslate="appApp.venta.total">Total</span></dt>
+          <dd>
+            <span>{{ venta.total }}</span>
+          </dd>
+          <dt><span jhiTranslate="appApp.venta.empleado">Empleado</span></dt>
+          <dd>
+            @if (venta.empleado) {
+              <div>
+                <a [routerLink]="['/empleado', venta.empleado.id, 'view']">{{ venta.empleado.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="appApp.venta.cliente">Cliente</span></dt>
+          <dd>
+            @if (venta.cliente) {
+              <div>
+                <a [routerLink]="['/cliente', venta.cliente.id, 'view']">{{ venta.cliente.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="appApp.venta.id_coche">Id Coche</span></dt>
+          <dd>
+            @if (venta.id_coche) {
+              <div>
+                <a [routerLink]="['/coche', venta.id_coche.id, 'view']">{{ venta.id_coche.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,141 @@
+<div>
+  <h2 id="page-heading" data-cy="VentaHeading">
+    <span jhiTranslate="appApp.venta.home.title">Ventas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="appApp.venta.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-venta"
+        [routerLink]="['/venta/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="appApp.venta.home.createLabel">Crear nuevo Venta</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (ventas?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="appApp.venta.home.notFound">Ningún Ventas encontrado</span>
+    </div>
+  }
+
+  @if (ventas && ventas.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fecha">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.venta.fecha">Fecha</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tipoPago">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.venta.tipoPago">Tipo Pago</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="total">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.venta.total">Total</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="empleado.id">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.venta.empleado">Empleado</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cliente.id">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.venta.cliente">Cliente</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="id_coche.id">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.venta.id_coche">Id Coche</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (venta of ventas; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/venta', venta.id, 'view']">{{ venta.id }}</a>
+              </td>
+              <td>{{ venta.fecha | formatMediumDate }}</td>
+              <td>{{ venta.tipoPago }}</td>
+              <td>{{ venta.total }}</td>
+              <td>
+                @if (venta.empleado) {
+                  <div>
+                    <a [routerLink]="['/empleado', venta.empleado.id, 'view']">{{ venta.empleado.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (venta.cliente) {
+                  <div>
+                    <a [routerLink]="['/cliente', venta.cliente.id, 'view']">{{ venta.cliente.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (venta.id_coche) {
+                  <div>
+                    <a [routerLink]="['/coche', venta.id_coche.id, 'view']">{{ venta.id_coche.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/venta', venta.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(venta)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
