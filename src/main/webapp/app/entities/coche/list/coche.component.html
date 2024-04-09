@@ -94,15 +94,15 @@
         </thead>
         <tbody>
           @for (coche of coches; track trackId) {
-            <tr data-cy="entityTable">
+            <tr data-cy="entityTable" [ngClass]="{ 'bg-danger': !coche.exposicion }">
               <td>
                 <a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a>
               </td>
               <td>{{ coche.color }}</td>
               <td>{{ coche.numeroSerie }}</td>
               <td>{{ coche.precio }}</td>
-              <td>{{ coche.exposicion }}</td>
-              <td>{{ coche.npuertas }}</td>              
+              <td>{{ coche.exposicion? 'Expuesto':'No expuesto' }}</td>
+              <td>{{ coche.npuertas }}</td>
               <td>
                 @if (coche.marca) {
                   <div>

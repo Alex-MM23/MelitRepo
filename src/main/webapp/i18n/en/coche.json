@@ -5,7 +5,7 @@
         "title": "Coches",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Coche",
-        "createOrEditLabel": "Create or edit a Coche",
+        "editLabel": "Edit a Coche",
         "notFound": "No Coches found"
       },
       "created": "A new Coche is created with identifier {{ param }}",
