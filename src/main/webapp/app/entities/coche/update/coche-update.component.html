@@ -22,7 +22,7 @@
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.color" for="field_color">Color</label>
-          <input type="text" class="form-control" name="color" id="field_color" data-cy="color" formControlName="color" />
+          <input type="text" class="form-control" name="color" id="field_color" data-cy="color" formControlName="color" required/>
         </div>
 
         <div class="mb-3">
@@ -34,12 +34,13 @@
             id="field_numeroSerie"
             data-cy="numeroSerie"
             formControlName="numeroSerie"
+            required
           />
         </div>
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.precio" for="field_precio">Precio</label>
-          <input type="number" class="form-control" name="precio" id="field_precio" data-cy="precio" formControlName="precio" />
+          <input type="number" class="form-control" name="precio" id="field_precio" data-cy="precio" formControlName="precio" required/>
         </div>
 
         <div class="mb-3">
@@ -51,19 +52,20 @@
             id="field_exposicion"
             data-cy="exposicion"
             formControlName="exposicion"
+            required
           />
         </div>
         <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.nPuertas" for="field_npuertas">Puertas</label>
-          <input type="number" class="form-control" name="npuertas" id="field_npuertas" data-cy="npuertas" formControlName="npuertas"/>
+          <input type="number" class="form-control" name="npuertas" id="field_npuertas" data-cy="npuertas" formControlName="npuertas" required/>
         </div>
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.marca" for="field_marca">Marca</label>
-          <select class="form-control" id="field_marca" data-cy="marca" name="marca" formControlName="marca" [compareWith]="compareMarca">
+          <select class="form-control" id="field_marca" data-cy="marca" name="marca" formControlName="marca" [compareWith]="compareMarca" required>
             <option [ngValue]="null"></option>
             @for (marcaOption of marcasSharedCollection; track $index) {
-              <option [ngValue]="marcaOption">{{ marcaOption.id }}</option>
+              <option [ngValue]="marcaOption">{{ marcaOption.nombre | titlecase }}</option>
             }
           </select>
         </div>
@@ -77,10 +79,11 @@
             name="modelo"
             formControlName="modelo"
             [compareWith]="compareModelo"
+            required
           >
             <option [ngValue]="null"></option>
             @for (modeloOption of modelosSharedCollection; track $index) {
-              <option [ngValue]="modeloOption">{{ modeloOption.id }}</option>
+              <option [ngValue]="modeloOption">{{ modeloOption.nombre | titlecase }}</option>
             }
           </select>
         </div>

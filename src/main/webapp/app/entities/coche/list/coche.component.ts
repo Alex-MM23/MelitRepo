@@ -26,7 +26,7 @@ import { CocheDeleteDialogComponent } from '../delete/coche-delete-dialog.compon
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
   ],
-  styleUrls: ['./coche.component.css'],
+  styleUrls: ['./coche.component.scss'],
 })
 export class CocheComponent implements OnInit {
   subscription: Subscription | null = null;

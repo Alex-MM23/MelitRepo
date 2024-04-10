@@ -157,8 +157,18 @@ public class CocheResource {
             return StreamSupport.stream(cocheRepository.findAll().spliterator(), false).filter(coche -> coche.getVenta() == null).toList();
         }
         log.debug("REST request to get all Coches");
-        log.debug(cocheRepository.findAll().toString() + "coches");
-        return cocheRepository.findAll();
+        List<Coche> auxCoches = cocheRepository.findAll();
+        
+        for (Coche coche : auxCoches) {
+            if(coche.getMarca() != null){
+                coche.getMarca().getNombre();
+            }
+            if(coche.getModelo() != null){
+                coche.getModelo().getNombre();
+            }
+        }
+
+        return auxCoches;
     }
 
     /**
@@ -171,7 +181,18 @@ public class CocheResource {
     public ResponseEntity<Coche> getCoche(@PathVariable("id") Long id) {
         log.debug("REST request to get Coche : {}", id);
         Optional<Coche> coche = cocheRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(coche);
+        if (coche.isPresent()) {
+            Coche cocheObj = coche.get();
+            if (cocheObj.getMarca() != null) {
+                cocheObj.getMarca().getNombre();
+            }
+            if (cocheObj.getModelo() != null) {
+                cocheObj.getModelo().getNombre();
+            }
+            return ResponseEntity.ok(cocheObj);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
