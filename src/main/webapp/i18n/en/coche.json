@@ -5,7 +5,7 @@
         "title": "Coches",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Coche",
-        "editLabel": "Edit a Coche",
+        "createOrEditLabel": "Create or edit a Coche",
         "notFound": "No Coches found"
       },
       "created": "A new Coche is created with identifier {{ param }}",
@@ -22,9 +22,11 @@
       "numeroSerie": "Numero Serie",
       "precio": "Precio",
       "exposicion": "Exposicion",
+      "nPuertas": "N Puertas",
+      "motor": "Motor",
+      "matricula": "Matricula",
       "marca": "Marca",
       "modelo": "Modelo",
-      "nPuertas": "Puertas",
       "venta": "Venta"
     }
   }

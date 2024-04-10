@@ -31,9 +31,17 @@
           <dd>
             <span>{{ coche.exposicion }}</span>
           </dd>
-          <dt><span jhiTranslate="appApp.coche.nPuertas">Nº Puertas</span></dt>
+          <dt><span jhiTranslate="appApp.coche.nPuertas">N Puertas</span></dt>
           <dd>
-            <span>{{ coche.npuertas }}</span>
+            <span>{{ coche.nPuertas }}</span>
+          </dd>
+          <dt><span jhiTranslate="appApp.coche.motor">Motor</span></dt>
+          <dd>
+            <span jhiTranslate="{{ 'appApp.motor.' + coche.motor }}">{{ coche.motor }}</span>
+          </dd>
+          <dt><span jhiTranslate="appApp.coche.matricula">Matricula</span></dt>
+          <dd>
+            <span>{{ coche.matricula }}</span>
           </dd>
           <dt><span jhiTranslate="appApp.coche.marca">Marca</span></dt>
           <dd>

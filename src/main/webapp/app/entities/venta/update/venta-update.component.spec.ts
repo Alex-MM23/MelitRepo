@@ -102,10 +102,10 @@ describe('Venta Management Update Component', () => {
 
     it('Should call id_coche query and add missing value', () => {
       const venta: IVenta = { id: 456 };
-      const id_coche: ICoche = { id: 5472 };
+      const id_coche: ICoche = { id: 19628 };
       venta.id_coche = id_coche;
 
-      const id_cocheCollection: ICoche[] = [{ id: 5195 }];
+      const id_cocheCollection: ICoche[] = [{ id: 12806 }];
       jest.spyOn(cocheService, 'query').mockReturnValue(of(new HttpResponse({ body: id_cocheCollection })));
       const expectedCollection: ICoche[] = [id_coche, ...id_cocheCollection];
       jest.spyOn(cocheService, 'addCocheToCollectionIfMissing').mockReturnValue(expectedCollection);
@@ -124,7 +124,7 @@ describe('Venta Management Update Component', () => {
       venta.empleado = empleado;
       const cliente: ICliente = { id: 17566 };
       venta.cliente = cliente;
-      const id_coche: ICoche = { id: 31395 };
+      const id_coche: ICoche = { id: 26129 };
       venta.id_coche = id_coche;
 
       activatedRoute.data = of({ venta });

@@ -1,11 +1,11 @@
-id;color;numero_serie;precio;exposicion
-1;Amarillo;whoa;18442.35;false
-2;Gris;per anti true;23393.7;true
-3;Gris;space quietly cloak;25948.46;false
-4;Verde;incidentally;14124.17;false
-5;Verde;fooey dicker;812.95;false
-6;Rojo;barring picket for;12016.38;true
-7;Rojo;quicken indeed;15175.78;false
-8;Violeta;concerning;19088.8;true
-9;Azul;zowie;13134.41;true
-10;Rojo;between ah;4589.47;false
+id;color;numero_serie;precio;exposicion;n_puertas;motor;matricula
+1;Amarillo;whoa;18442.35;false;20518;DIESEL;per anti true
+2;Rojo;softly anxious;13324.24;false;4058;DIESEL;mmm generously
+3;Gris;general yieldingly;20916;false;27512;GASOLINA;demoralise
+4;Morado;forenenst;20343.3;false;17487;DIESEL;above the
+5;Verde;test psst;24529.99;true;12309;DIESEL;oh
+6;Morado;hm eye whittle;19282.19;true;26368;GASOLINA;cant barter pish
+7;Amarillo;hence;18628.44;false;2533;DIESEL;welcome monger
+8;Amarillo;oh ick;31850.31;true;3716;ELECTRICO;inasmuch around itchy
+9;Verde;amusing;19506.59;true;18012;ELECTRICO;burglar inasmuch coop
+10;Violeta;itemize useless;14220.45;true;21398;ELECTRICO;cluttered

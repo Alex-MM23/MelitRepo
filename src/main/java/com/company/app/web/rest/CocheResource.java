@@ -130,8 +130,14 @@ public class CocheResource {
                 if (coche.getExposicion() != null) {
                     existingCoche.setExposicion(coche.getExposicion());
                 }
-                if(coche.getNPuertas() != null) {
-                    existingCoche.setNPuertas(coche.getNPuertas());
+                if (coche.getnPuertas() != null) {
+                    existingCoche.setnPuertas(coche.getnPuertas());
+                }
+                if (coche.getMotor() != null) {
+                    existingCoche.setMotor(coche.getMotor());
+                }
+                if (coche.getMatricula() != null) {
+                    existingCoche.setMatricula(coche.getMatricula());
                 }
 
                 return existingCoche;
@@ -157,18 +163,7 @@ public class CocheResource {
             return StreamSupport.stream(cocheRepository.findAll().spliterator(), false).filter(coche -> coche.getVenta() == null).toList();
         }
         log.debug("REST request to get all Coches");
-        List<Coche> auxCoches = cocheRepository.findAll();
-        
-        for (Coche coche : auxCoches) {
-            if(coche.getMarca() != null){
-                coche.getMarca().getNombre();
-            }
-            if(coche.getModelo() != null){
-                coche.getModelo().getNombre();
-            }
-        }
-
-        return auxCoches;
+        return cocheRepository.findAll();
     }
 
     /**
@@ -181,18 +176,7 @@ public class CocheResource {
     public ResponseEntity<Coche> getCoche(@PathVariable("id") Long id) {
         log.debug("REST request to get Coche : {}", id);
         Optional<Coche> coche = cocheRepository.findById(id);
-        if (coche.isPresent()) {
-            Coche cocheObj = coche.get();
-            if (cocheObj.getMarca() != null) {
-                cocheObj.getMarca().getNombre();
-            }
-            if (cocheObj.getModelo() != null) {
-                cocheObj.getModelo().getNombre();
-            }
-            return ResponseEntity.ok(cocheObj);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseUtil.wrapOrNotFound(coche);
     }
 
     /**

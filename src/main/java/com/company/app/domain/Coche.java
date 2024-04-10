@@ -1,5 +1,6 @@
 package com.company.app.domain;
 
+import com.company.app.domain.enumeration.motor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -31,8 +32,15 @@ public class Coche implements Serializable {
     @Column(name = "exposicion")
     private Boolean exposicion;
 
-    @Column(name = "nPuertas")
+    @Column(name = "n_puertas")
     private Integer nPuertas;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "motor")
+    private motor motor;
+
+    @Column(name = "matricula")
+    private String matricula;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "marcas", "modelos" }, allowSetters = true)
@@ -113,6 +121,45 @@ public class Coche implements Serializable {
         this.exposicion = exposicion;
     }
 
+    public Integer getnPuertas() {
+        return this.nPuertas;
+    }
+
+    public Coche nPuertas(Integer nPuertas) {
+        this.setnPuertas(nPuertas);
+        return this;
+    }
+
+    public void setnPuertas(Integer nPuertas) {
+        this.nPuertas = nPuertas;
+    }
+
+    public motor getMotor() {
+        return this.motor;
+    }
+
+    public Coche motor(motor motor) {
+        this.setMotor(motor);
+        return this;
+    }
+
+    public void setMotor(motor motor) {
+        this.motor = motor;
+    }
+
+    public String getMatricula() {
+        return this.matricula;
+    }
+
+    public Coche matricula(String matricula) {
+        this.setMatricula(matricula);
+        return this;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
     public Marca getMarca() {
         return this.marca;
     }
@@ -137,19 +184,6 @@ public class Coche implements Serializable {
     public Coche modelo(Modelo modelo) {
         this.setModelo(modelo);
         return this;
-    }
-
-    public Integer getNPuertas() {
-        return this.nPuertas;
-    }
-
-    public Coche nPuertas(Integer nPuertas) {
-        this.setNPuertas(nPuertas);
-        return this;
-    }
-
-    public void setNPuertas(Integer nPuertas) {
-        this.nPuertas = nPuertas;
     }
 
     public Venta getVenta() {
@@ -199,7 +233,9 @@ public class Coche implements Serializable {
             ", numeroSerie='" + getNumeroSerie() + "'" +
             ", precio=" + getPrecio() +
             ", exposicion='" + getExposicion() + "'" +
-            ", puertas='" + getNPuertas() + "'" +
+            ", nPuertas=" + getnPuertas() +
+            ", motor='" + getMotor() + "'" +
+            ", matricula='" + getMatricula() + "'" +
             "}";
     }
 }

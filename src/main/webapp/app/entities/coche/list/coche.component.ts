@@ -26,12 +26,12 @@ import { CocheDeleteDialogComponent } from '../delete/coche-delete-dialog.compon
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
   ],
-  styleUrls: ['./coche.component.scss'],
 })
 export class CocheComponent implements OnInit {
   subscription: Subscription | null = null;
   coches?: ICoche[];
   isLoading = false;
+
   sortState = sortStateSignal({});
 
   public router = inject(Router);
@@ -86,7 +86,6 @@ export class CocheComponent implements OnInit {
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    console.log(dataFromBody);
     this.coches = this.refineData(dataFromBody);
   }
 
@@ -104,7 +103,6 @@ export class CocheComponent implements OnInit {
     const queryObject: any = {
       sort: this.sortService.buildSortParam(this.sortState()),
     };
-
     return this.cocheService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 

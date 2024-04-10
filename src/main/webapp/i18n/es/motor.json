@@ -1,0 +1,10 @@
+{
+  "appApp": {
+    "motor": {
+      "null": "",
+      "GASOLINA": "GASOLINA",
+      "DIESEL": "DIESEL",
+      "ELECTRICO": "ELECTRICO"
+    }
+  }
+}

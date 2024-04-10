@@ -1,28 +1,23 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-coche-heading" data-cy="CocheCreateUpdateHeading" jhiTranslate="appApp.coche.home.createOrEditLabel">
+        Crear o editar Coche
+      </h2>
+
       <div>
-        
         <jhi-alert-error></jhi-alert-error>
 
         @if (editForm.controls.id.value !== null) {
-          <h2 id="jhi-coche-heading" data-cy="CocheCreateUpdateHeading" jhiTranslate="appApp.coche.home.editLabel">
-            Editar Coche
-          </h2>
           <div class="mb-3">
             <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
             <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
           </div>
         }
-        @else {
-          <h2 id="jhi-coche-heading" data-cy="CocheCreateUpdateHeading" jhiTranslate="appApp.coche.home.createLabel">
-            Crear Coche
-          </h2>
-        }
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.color" for="field_color">Color</label>
-          <input type="text" class="form-control" name="color" id="field_color" data-cy="color" formControlName="color" required/>
+          <input type="text" class="form-control" name="color" id="field_color" data-cy="color" formControlName="color" />
         </div>
 
         <div class="mb-3">
@@ -34,13 +29,12 @@
             id="field_numeroSerie"
             data-cy="numeroSerie"
             formControlName="numeroSerie"
-            required
           />
         </div>
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.precio" for="field_precio">Precio</label>
-          <input type="number" class="form-control" name="precio" id="field_precio" data-cy="precio" formControlName="precio" required/>
+          <input type="number" class="form-control" name="precio" id="field_precio" data-cy="precio" formControlName="precio" />
         </div>
 
         <div class="mb-3">
@@ -52,20 +46,35 @@
             id="field_exposicion"
             data-cy="exposicion"
             formControlName="exposicion"
-            required
           />
         </div>
+
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="appApp.coche.nPuertas" for="field_npuertas">Puertas</label>
-          <input type="number" class="form-control" name="npuertas" id="field_npuertas" data-cy="npuertas" formControlName="npuertas" required/>
+          <label class="form-label" jhiTranslate="appApp.coche.nPuertas" for="field_nPuertas">N Puertas</label>
+          <input type="number" class="form-control" name="nPuertas" id="field_nPuertas" data-cy="nPuertas" formControlName="nPuertas" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.coche.motor" for="field_motor">Motor</label>
+          <select class="form-control" name="motor" formControlName="motor" id="field_motor" data-cy="motor">
+            <option [ngValue]="null">{{ 'appApp.motor.null' | translate }}</option>
+            @for (motor of motorValues; track $index) {
+              <option [value]="motor">{{ 'appApp.motor.' + motor | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.coche.matricula" for="field_matricula">Matricula</label>
+          <input type="text" class="form-control" name="matricula" id="field_matricula" data-cy="matricula" formControlName="matricula" />
         </div>
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.marca" for="field_marca">Marca</label>
-          <select class="form-control" id="field_marca" data-cy="marca" name="marca" formControlName="marca" [compareWith]="compareMarca" required>
+          <select class="form-control" id="field_marca" data-cy="marca" name="marca" formControlName="marca" [compareWith]="compareMarca">
             <option [ngValue]="null"></option>
             @for (marcaOption of marcasSharedCollection; track $index) {
-              <option [ngValue]="marcaOption">{{ marcaOption.nombre | titlecase }}</option>
+              <option [ngValue]="marcaOption">{{ marcaOption.id }}</option>
             }
           </select>
         </div>
@@ -79,11 +88,10 @@
             name="modelo"
             formControlName="modelo"
             [compareWith]="compareModelo"
-            required
           >
             <option [ngValue]="null"></option>
             @for (modeloOption of modelosSharedCollection; track $index) {
-              <option [ngValue]="modeloOption">{{ modeloOption.nombre | titlecase }}</option>
+              <option [ngValue]="modeloOption">{{ modeloOption.id }}</option>
             }
           </select>
         </div>

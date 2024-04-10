@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.company.app.IntegrationTest;
 import com.company.app.domain.Coche;
+import com.company.app.domain.enumeration.motor;
 import com.company.app.repository.CocheRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
@@ -43,8 +44,14 @@ class CocheResourceIT {
     private static final Boolean DEFAULT_EXPOSICION = false;
     private static final Boolean UPDATED_EXPOSICION = true;
 
-    private static final Integer DEFAULT_PUERTAS = 1;
-    private static final Integer UPDATED_PUERTAS = 2;
+    private static final Integer DEFAULT_N_PUERTAS = 1;
+    private static final Integer UPDATED_N_PUERTAS = 2;
+
+    private static final motor DEFAULT_MOTOR = motor.GASOLINA;
+    private static final motor UPDATED_MOTOR = motor.DIESEL;
+
+    private static final String DEFAULT_MATRICULA = "AAAAAAAAAA";
+    private static final String UPDATED_MATRICULA = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/coches";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -78,7 +85,10 @@ class CocheResourceIT {
             .numeroSerie(DEFAULT_NUMERO_SERIE)
             .precio(DEFAULT_PRECIO)
             .exposicion(DEFAULT_EXPOSICION)
-;        return coche;
+            .nPuertas(DEFAULT_N_PUERTAS)
+            .motor(DEFAULT_MOTOR)
+            .matricula(DEFAULT_MATRICULA);
+        return coche;
     }
 
     /**
@@ -93,7 +103,9 @@ class CocheResourceIT {
             .numeroSerie(UPDATED_NUMERO_SERIE)
             .precio(UPDATED_PRECIO)
             .exposicion(UPDATED_EXPOSICION)
-;
+            .nPuertas(UPDATED_N_PUERTAS)
+            .motor(UPDATED_MOTOR)
+            .matricula(UPDATED_MATRICULA);
         return coche;
     }
 
@@ -155,7 +167,10 @@ class CocheResourceIT {
             .andExpect(jsonPath("$.[*].numeroSerie").value(hasItem(DEFAULT_NUMERO_SERIE)))
             .andExpect(jsonPath("$.[*].precio").value(hasItem(DEFAULT_PRECIO.doubleValue())))
             .andExpect(jsonPath("$.[*].exposicion").value(hasItem(DEFAULT_EXPOSICION.booleanValue())))
-;    }
+            .andExpect(jsonPath("$.[*].nPuertas").value(hasItem(DEFAULT_N_PUERTAS)))
+            .andExpect(jsonPath("$.[*].motor").value(hasItem(DEFAULT_MOTOR.toString())))
+            .andExpect(jsonPath("$.[*].matricula").value(hasItem(DEFAULT_MATRICULA)));
+    }
 
     @Test
     @Transactional
@@ -173,7 +188,10 @@ class CocheResourceIT {
             .andExpect(jsonPath("$.numeroSerie").value(DEFAULT_NUMERO_SERIE))
             .andExpect(jsonPath("$.precio").value(DEFAULT_PRECIO.doubleValue()))
             .andExpect(jsonPath("$.exposicion").value(DEFAULT_EXPOSICION.booleanValue()))
-;    }
+            .andExpect(jsonPath("$.nPuertas").value(DEFAULT_N_PUERTAS))
+            .andExpect(jsonPath("$.motor").value(DEFAULT_MOTOR.toString()))
+            .andExpect(jsonPath("$.matricula").value(DEFAULT_MATRICULA));
+    }
 
     @Test
     @Transactional
@@ -194,7 +212,14 @@ class CocheResourceIT {
         Coche updatedCoche = cocheRepository.findById(coche.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedCoche are not directly saved in db
         em.detach(updatedCoche);
-        updatedCoche.color(UPDATED_COLOR).numeroSerie(UPDATED_NUMERO_SERIE).precio(UPDATED_PRECIO).exposicion(UPDATED_EXPOSICION);
+        updatedCoche
+            .color(UPDATED_COLOR)
+            .numeroSerie(UPDATED_NUMERO_SERIE)
+            .precio(UPDATED_PRECIO)
+            .exposicion(UPDATED_EXPOSICION)
+            .nPuertas(UPDATED_N_PUERTAS)
+            .motor(UPDATED_MOTOR)
+            .matricula(UPDATED_MATRICULA);
 
         restCocheMockMvc
             .perform(
@@ -270,7 +295,7 @@ class CocheResourceIT {
         Coche partialUpdatedCoche = new Coche();
         partialUpdatedCoche.setId(coche.getId());
 
-        partialUpdatedCoche.color(UPDATED_COLOR).precio(UPDATED_PRECIO);
+        partialUpdatedCoche.color(UPDATED_COLOR).precio(UPDATED_PRECIO).nPuertas(UPDATED_N_PUERTAS).motor(UPDATED_MOTOR);
 
         restCocheMockMvc
             .perform(
@@ -298,7 +323,14 @@ class CocheResourceIT {
         Coche partialUpdatedCoche = new Coche();
         partialUpdatedCoche.setId(coche.getId());
 
-        partialUpdatedCoche.color(UPDATED_COLOR).numeroSerie(UPDATED_NUMERO_SERIE).precio(UPDATED_PRECIO).exposicion(UPDATED_EXPOSICION);
+        partialUpdatedCoche
+            .color(UPDATED_COLOR)
+            .numeroSerie(UPDATED_NUMERO_SERIE)
+            .precio(UPDATED_PRECIO)
+            .exposicion(UPDATED_EXPOSICION)
+            .nPuertas(UPDATED_N_PUERTAS)
+            .motor(UPDATED_MOTOR)
+            .matricula(UPDATED_MATRICULA);
 
         restCocheMockMvc
             .perform(

@@ -22,7 +22,9 @@ type CocheFormGroupContent = {
   numeroSerie: FormControl<ICoche['numeroSerie']>;
   precio: FormControl<ICoche['precio']>;
   exposicion: FormControl<ICoche['exposicion']>;
-  npuertas: FormControl<ICoche['npuertas']>;
+  nPuertas: FormControl<ICoche['nPuertas']>;
+  motor: FormControl<ICoche['motor']>;
+  matricula: FormControl<ICoche['matricula']>;
   marca: FormControl<ICoche['marca']>;
   modelo: FormControl<ICoche['modelo']>;
 };
@@ -48,7 +50,9 @@ export class CocheFormService {
       numeroSerie: new FormControl(cocheRawValue.numeroSerie),
       precio: new FormControl(cocheRawValue.precio),
       exposicion: new FormControl(cocheRawValue.exposicion),
-      npuertas: new FormControl(cocheRawValue.npuertas),
+      nPuertas: new FormControl(cocheRawValue.nPuertas),
+      motor: new FormControl(cocheRawValue.motor),
+      matricula: new FormControl(cocheRawValue.matricula),
       marca: new FormControl(cocheRawValue.marca),
       modelo: new FormControl(cocheRawValue.modelo),
     });
