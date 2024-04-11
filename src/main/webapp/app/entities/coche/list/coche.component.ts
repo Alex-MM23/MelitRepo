@@ -138,10 +138,10 @@ export class CocheComponent implements OnInit {
     const año = 2000;
     if(plate >= arrYearPlate[0]) {
       for(let i = 0; i < arrYearPlate.length; i++){
-        if(plate >= arrPlates[i] && plate <= arrPlates[i + 1]){
+        if(plate >= arrYearPlate[i] && plate <= arrYearPlate[i + 1]){
           return año + i;
         }
-        if(plate > arrPlates[arrYearPlate.length - 1]){
+        if(plate > arrYearPlate[arrYearPlate.length - 1]){
           return 2024;
         }
       }
