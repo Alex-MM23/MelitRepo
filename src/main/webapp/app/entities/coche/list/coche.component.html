@@ -72,14 +72,28 @@
             </th>
             <th scope="col" jhiSortBy="nPuertas">
               <div class="d-flex">
-                <span jhiTranslate="appApp.coche.nPuertas">Puertas</span>
+                <span jhiTranslate="appApp.coche.nPuertas">N Puertas</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="motor">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.coche.motor">Motor</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="matricula">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.coche.matricula">Matricula</span>
+
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="marca.id">
               <div class="d-flex">
-                <span jhiTranslate="appApp.modelo.marca">Marca</span>
-
+                <span jhiTranslate="appApp.coche.marca">Marca</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -89,33 +103,58 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span>Año</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span>Pegatina</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           @for (coche of coches; track trackId) {
-            <tr data-cy="entityTable" *ngIf="((coche.precio ?? 0) * 100) % 2 == 0" [ngClass]="{ 'bg-mal': !coche.exposicion, 'bg-bien': coche.exposicion}">
-              <td>
+            <tr data-cy="entityTable" [ngClass]="{ 'bg-mal': !coche.exposicion, 'bg-bien': coche.exposicion}">              <td>
                 <a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a>
               </td>
               <td>{{ coche.color }}</td>
               <td>{{ coche.numeroSerie }}</td>
-              <td [ngClass]="{'bg-danger': (coche.precio ?? 0) > 10000}" >{{ coche.precio | number}}</td>
-              <td>{{ coche.exposicion? 'Expuesto':'No expuesto' }}</td>
-              <td>{{ coche.npuertas }}</td>
+              <td>{{ coche.precio }}</td>
+              <td>{{ coche.exposicion }}</td>
+              <td>{{ coche.nPuertas }}</td>
+              <td jhiTranslate="{{ 'appApp.motor.' + coche.motor }}">{{ coche.motor }}</td>
+              <td>{{ coche.matricula }}</td>
               <td>
                 @if (coche.marca) {
                   <div>
-                    <a [routerLink]="['/marca', coche.marca.id, 'view']">{{ coche.marca.nombre | titlecase }}</a>
+                    <a [routerLink]="['/marca', coche.marca.id, 'view']">{{ coche.marca.nombre }}</a>
                   </div>
                 }
               </td>
               <td>
                 @if (coche.modelo) {
                   <div>
-                    <a [routerLink]="['/modelo', coche.modelo.id, 'view']">{{ coche.modelo.nombre | titlecase }}</a>
+                    <a [routerLink]="['/modelo', coche.modelo.id, 'view']">{{ coche.modelo.nombre }}</a>
                   </div>
                 }
+              </td>
+              @if(coche.anio != null){
+                <td>{{ coche.anio }}</td>
+              }@else{
+                <td>El vehículo no existe</td>
+              }
+              <td [ngClass]="{
+                'bg-etiqueta-c': coche.pegatina === 'C',
+                'bg-etiqueta-b': coche.pegatina === 'B',
+                'bg-etiqueta-0': coche.pegatina === '0'
+              }">
+                {{ coche.pegatina }}
               </td>
               <td class="text-end">
                 <div class="btn-group">

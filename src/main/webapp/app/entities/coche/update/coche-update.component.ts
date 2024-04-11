@@ -11,6 +11,7 @@ import { IMarca } from 'app/entities/marca/marca.model';
 import { MarcaService } from 'app/entities/marca/service/marca.service';
 import { IModelo } from 'app/entities/modelo/modelo.model';
 import { ModeloService } from 'app/entities/modelo/service/modelo.service';
+import { motor } from 'app/entities/enumerations/motor.model';
 import { CocheService } from '../service/coche.service';
 import { ICoche } from '../coche.model';
 import { CocheFormService, CocheFormGroup } from './coche-form.service';
@@ -24,6 +25,7 @@ import { CocheFormService, CocheFormGroup } from './coche-form.service';
 export class CocheUpdateComponent implements OnInit {
   isSaving = false;
   coche: ICoche | null = null;
+  motorValues = Object.keys(motor);
 
   marcasSharedCollection: IMarca[] = [];
   modelosSharedCollection: IModelo[] = [];

@@ -23,6 +23,15 @@
     {
       "fieldName": "nPuertas",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "motor",
+      "fieldType": "motor",
+      "fieldValues": "GASOLINA,DIESEL,ELECTRICO"
+    },
+    {
+      "fieldName": "matricula",
+      "fieldType": "String"
     }
   ],
   "name": "Coche",
