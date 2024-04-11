@@ -102,11 +102,28 @@ export class CocheComponent implements OnInit {
           const year = this.findYearByPlate(arrPlates, letrasPlate);
           coche.anio = year as number;
           coche.pegatina = this.pegatina(coche);
+          coche.itv = this.itv(coche.anio);
         }
       }
     }
-    console.log(data);
+
     return predicate && order ? data.sort(this.sortService.startSort({ predicate, order })) : data;
+  }
+
+  protected itv (anio: number): number | string {
+    const anioActual = new Date().getFullYear();
+    let antiguedad = anioActual - anio;
+    if (antiguedad < 5) {
+      return 4;
+    }
+    if (antiguedad < 10 && antiguedad >= 5) {
+      return 2;
+    }
+    if (antiguedad > 10) {
+      return 1;
+    }
+
+    return "Error al calcular la ITV";
   }
 
   protected pegatina(coche: ICoche): string{
@@ -141,8 +158,8 @@ export class CocheComponent implements OnInit {
         if(plate >= arrYearPlate[i] && plate <= arrYearPlate[i + 1]){
           return año + i;
         }
-        if(plate > arrYearPlate[arrYearPlate.length - 1]){
-          return 2024;
+        if(plate > arrPlates[arrYearPlate.length - 1]){
+          return new Date().getFullYear();
         }
       }
     }else{
