@@ -15,6 +15,7 @@ export interface ICoche {
   pegatina?: string | null;
   marca?: IMarca | null;
   modelo?: IModelo | null;
+  itv?: number | string | null;
 }
 
 export type NewCoche = Omit<ICoche, 'id'> & { id: null };
