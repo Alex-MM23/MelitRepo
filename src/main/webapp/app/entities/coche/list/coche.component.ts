@@ -130,8 +130,8 @@ export class CocheComponent implements OnInit {
     return '';
   }
 
-  protected extractPlateLetters(str: string): string {
-    return str.slice(-3);
+  protected extractPlateLetters(plate: string): string {
+    return plate.slice(-3);
   }
 
   protected findYearByPlate(arrYearPlate: string [], plate: string): number | null {
