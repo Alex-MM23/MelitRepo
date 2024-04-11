@@ -103,13 +103,24 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span>Año</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span>Pegatina</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           @for (coche of coches; track trackId) {
-            <tr data-cy="entityTable">
-              <td>
+            <tr data-cy="entityTable" [ngClass]="{ 'bg-mal': !coche.exposicion, 'bg-bien': coche.exposicion}">              <td>
                 <a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a>
               </td>
               <td>{{ coche.color }}</td>
@@ -122,16 +133,28 @@
               <td>
                 @if (coche.marca) {
                   <div>
-                    <a [routerLink]="['/marca', coche.marca.id, 'view']">{{ coche.marca.id }}</a>
+                    <a [routerLink]="['/marca', coche.marca.id, 'view']">{{ coche.marca.nombre }}</a>
                   </div>
                 }
               </td>
               <td>
                 @if (coche.modelo) {
                   <div>
-                    <a [routerLink]="['/modelo', coche.modelo.id, 'view']">{{ coche.modelo.id }}</a>
+                    <a [routerLink]="['/modelo', coche.modelo.id, 'view']">{{ coche.modelo.nombre }}</a>
                   </div>
                 }
+              </td>
+              @if(coche.anio != null){
+                <td>{{ coche.anio }}</td>
+              }@else{
+                <td>El vehículo no existe</td>
+              }
+              <td [ngClass]="{
+                'bg-etiqueta-c': coche.pegatina === 'C',
+                'bg-etiqueta-b': coche.pegatina === 'B',
+                'bg-etiqueta-0': coche.pegatina === '0'
+              }">
+                {{ coche.pegatina }}
               </td>
               <td class="text-end">
                 <div class="btn-group">

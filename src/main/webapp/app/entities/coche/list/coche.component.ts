@@ -11,6 +11,9 @@ import { SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigati
 import { ICoche } from '../coche.model';
 import { EntityArrayResponseType, CocheService } from '../service/coche.service';
 import { CocheDeleteDialogComponent } from '../delete/coche-delete-dialog.component';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+
+const arrPlates = ['BBB', 'BDR', 'BRT', 'CDC', 'CRC', 'DFF', 'DVB', 'FKC', 'FYY', 'GKH', 'GSR', 'HBG', 'HHT', 'HNK', 'HVF', 'JBY', 'JKZ','JVZ','KGN','KSS','LDR','LMC','LVV','MDD','MMN','MPL']; 
 
 @Component({
   standalone: true,
@@ -26,6 +29,7 @@ import { CocheDeleteDialogComponent } from '../delete/coche-delete-dialog.compon
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
   ],
+  styleUrls: ['./coche.component.scss'],
 })
 export class CocheComponent implements OnInit {
   subscription: Subscription | null = null;
@@ -91,7 +95,60 @@ export class CocheComponent implements OnInit {
 
   protected refineData(data: ICoche[]): ICoche[] {
     const { predicate, order } = this.sortState();
+    for(let coche of data){
+      if(coche.matricula != null){
+        const letrasPlate = this.extractPlateLetters(coche.matricula);
+        if(!/[AEIOUQÑ]/.test(letrasPlate)){
+          const year = this.findYearByPlate(arrPlates, letrasPlate);
+          coche.anio = year as number;
+          coche.pegatina = this.pegatina(coche);
+        }
+      }
+    }
+    console.log(data);
     return predicate && order ? data.sort(this.sortService.startSort({ predicate, order })) : data;
+  }
+
+  protected pegatina(coche: ICoche): string{
+    if(coche.anio !== undefined && coche.anio !== null){
+      if(coche.anio < 2000 && coche.motor !== 'ELECTRICO'){
+        return 'A';
+      }else{
+        if(coche.motor === 'DIESEL' || coche.motor === 'GASOLINA'){
+          if(coche.anio >= 2000 && coche.anio <= 2005){
+            return 'B';
+          }
+          if(coche.anio >= 2006 && coche.anio <= new Date().getFullYear()){
+            return 'C';
+          }
+        }
+      }
+      if(coche.motor === 'ELECTRICO'){
+        return '0';
+      }
+    }
+    return '';
+  }
+
+  protected extractPlateLetters(str: string): string {
+    return str.slice(-3);
+  }
+
+  protected findYearByPlate(arrYearPlate: string [], plate: string): number | null {
+    const año = 2000;
+    if(plate >= arrYearPlate[0]) {
+      for(let i = 0; i < arrYearPlate.length; i++){
+        if(plate >= arrPlates[i] && plate <= arrPlates[i + 1]){
+          return año + i;
+        }
+        if(plate > arrPlates[arrYearPlate.length - 1]){
+          return 2024;
+        }
+      }
+    }else{
+      return 1999;
+    }
+    return null;
   }
 
   protected fillComponentAttributesFromResponseBody(data: ICoche[] | null): ICoche[] {

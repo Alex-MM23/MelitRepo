@@ -163,7 +163,18 @@ public class CocheResource {
             return StreamSupport.stream(cocheRepository.findAll().spliterator(), false).filter(coche -> coche.getVenta() == null).toList();
         }
         log.debug("REST request to get all Coches");
-        return cocheRepository.findAll();
+        List<Coche> auxCoches = cocheRepository.findAll();
+        
+        for (Coche coche : auxCoches) {
+            if(coche.getMarca() != null){
+                coche.getMarca().getNombre();
+            }
+            if(coche.getModelo() != null){
+                coche.getModelo().getNombre();
+            }
+        }
+
+        return auxCoches;
     }
 
     /**

@@ -66,7 +66,7 @@
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.matricula" for="field_matricula">Matricula</label>
-          <input type="text" class="form-control" name="matricula" id="field_matricula" data-cy="matricula" formControlName="matricula" />
+          <input type="text" class="form-control" name="matricula" id="field_matricula" data-cy="matricula" formControlName="matricula" required pattern="\d{4}\s?(?!.*(A|E|U|I|O|Q|Ñ))[A-Z]{3}"/>
         </div>
 
         <div class="mb-3">

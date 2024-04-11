@@ -11,6 +11,8 @@ export interface ICoche {
   nPuertas?: number | null;
   motor?: keyof typeof motor | null;
   matricula?: string | null;
+  anio?: number | null;
+  pegatina?: string | null;
   marca?: IMarca | null;
   modelo?: IModelo | null;
 }
