@@ -31,6 +31,7 @@
   }
 
   @if (coches && coches.length > 0) {
+    <jhi-component-search (sendSearch)="callSearchComponent(coches, $event)"></jhi-component-search>
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>

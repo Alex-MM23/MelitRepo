@@ -1,4 +1,4 @@
-import { Component, NgZone, inject, OnInit } from '@angular/core';
+import { Component, NgZone, inject, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { combineLatest, filter, Observable, Subscription, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,7 @@ import { ICoche } from '../coche.model';
 import { EntityArrayResponseType, CocheService } from '../service/coche.service';
 import { CocheDeleteDialogComponent } from '../delete/coche-delete-dialog.component';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { ComponentSearchComponent } from '../../../layouts/component-search/component-search.component';
 
 const arrPlates = ['BBB', 'BDR', 'BRT', 'CDC', 'CRC', 'DFF', 'DVB', 'FKC', 'FYY', 'GKH', 'GSR', 'HBG', 'HHT', 'HNK', 'HVF', 'JBY', 'JKZ','JVZ','KGN','KSS','LDR','LMC','LVV','MDD','MMN','MPL']; 
 
@@ -28,15 +29,24 @@ const arrPlates = ['BBB', 'BDR', 'BRT', 'CDC', 'CRC', 'DFF', 'DVB', 'FKC', 'FYY'
     DurationPipe,
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
+    ComponentSearchComponent,
   ],
   styleUrls: ['./coche.component.scss'],
 })
 export class CocheComponent implements OnInit {
   subscription: Subscription | null = null;
   coches?: ICoche[];
+  cochesFiltered: ICoche[] = [];
   isLoading = false;
 
   sortState = sortStateSignal({});
+
+  callSearchComponent(data: ICoche[], textSearch: String): void {
+    const result= ComponentSearchComponent.validarSearch(data, textSearch);
+    if (result) {
+      this.cochesFiltered.push(result);
+    }
+  }
 
   public router = inject(Router);
   protected cocheService = inject(CocheService);
@@ -91,23 +101,45 @@ export class CocheComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.coches = this.refineData(dataFromBody);
+    //console.log(this.searchText);
   }
 
   protected refineData(data: ICoche[]): ICoche[] {
     const { predicate, order } = this.sortState();
     for(let coche of data){
-      if(coche.matricula != null){
-        const letrasPlate = this.extractPlateLetters(coche.matricula);
-        if(!/[AEIOUQÑ]/.test(letrasPlate)){
-          const year = this.findYearByPlate(arrPlates, letrasPlate);
-          coche.anio = year as number;
-          coche.pegatina = this.pegatina(coche);
-          coche.itv = this.itv(coche.anio);
+        if(coche.matricula != null){
+          const letrasPlate = this.extractPlateLetters(coche.matricula);
+          if(!/[AEIOUQÑ]/.test(letrasPlate)){
+            const year = this.findYearByPlate(arrPlates, letrasPlate);
+            coche.anio = year as number;
+            coche.pegatina = this.pegatina(coche);
+            coche.itv = this.itv(coche.anio);
+          }
         }
-      }
     }
 
     return predicate && order ? data.sort(this.sortService.startSort({ predicate, order })) : data;
+  }
+
+  protected buscadorCoche(coche: ICoche): boolean {
+    let blnBadera = true;
+    console.log("Coche:" + coche);
+    if(this.searchText != ''){
+      for (const campoCoche in coche) {
+        console.log(campoCoche);
+        if(campoCoche != null){
+            let fieldValue = campoCoche;
+            if(typeof fieldValue === 'string'){
+              fieldValue = fieldValue.toLowerCase();
+            }
+            if(fieldValue.includes(this.searchText)){
+              blnBadera = false;
+              break;
+            }
+        }
+      }
+    }
+    return blnBadera;
   }
 
   protected itv (anio: number): number | string {
@@ -193,3 +225,4 @@ export class CocheComponent implements OnInit {
     });
   }
 }
+
