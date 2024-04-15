@@ -79,4 +79,6 @@
       >!
     </p>
   </div>
+  <input type="text" [(ngModel)]="textoEjemplo">
+  <jhi-prueba [texto]="textoEjemplo" (sendText)="textoEjemplo = $event"></jhi-prueba>
 </div>

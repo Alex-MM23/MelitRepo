@@ -1,21 +1,25 @@
 import { ICoche, NewCoche } from './coche.model';
 
 export const sampleWithRequiredData: ICoche = {
-  id: 19628,
+  id: 16166,
 };
 
 export const sampleWithPartialData: ICoche = {
-  id: 21338,
-  color: 'Morado',
-  precio: 14753.15,
+  id: 13716,
+  nPuertas: 19706,
+  motor: 'DIESEL',
+  matricula: 'pfft',
 };
 
 export const sampleWithFullData: ICoche = {
-  id: 13927,
-  color: 'Gris',
-  numeroSerie: 'big-hearted swaddle',
-  precio: 1012.53,
+  id: 15435,
+  color: 'Blanco',
+  numeroSerie: 'sans patio drat',
+  precio: 13099.24,
   exposicion: true,
+  nPuertas: 5435,
+  motor: 'DIESEL',
+  matricula: 'dote advocate during',
 };
 
 export const sampleWithNewData: NewCoche = {

@@ -22,6 +22,9 @@
       "numeroSerie": "Numero Serie",
       "precio": "Precio",
       "exposicion": "Exposicion",
+      "nPuertas": "N Puertas",
+      "motor": "Motor",
+      "matricula": "Matricula",
       "marca": "Marca",
       "modelo": "Modelo",
       "venta": "Venta"

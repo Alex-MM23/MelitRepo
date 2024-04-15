@@ -81,6 +81,9 @@ public class CocheGatlingTest extends Simulation {
                                 ", \"numeroSerie\": \"SAMPLE_TEXT\"" +
                                 ", \"precio\": 0" +
                                 ", \"exposicion\": null" +
+                                ", \"nPuertas\": 0" +
+                                ", \"motor\": \"GASOLINA\"" +
+                                ", \"matricula\": \"SAMPLE_TEXT\"" +
                                 "}"
                             )
                         )

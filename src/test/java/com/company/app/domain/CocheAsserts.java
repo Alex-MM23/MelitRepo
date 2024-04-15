@@ -51,7 +51,10 @@ public class CocheAsserts {
             .satisfies(e -> assertThat(e.getNumeroSerie()).as("check numeroSerie").isEqualTo(actual.getNumeroSerie()))
             .satisfies(e -> assertThat(e.getPrecio()).as("check precio").isEqualTo(actual.getPrecio()))
             .satisfies(e -> assertThat(e.getExposicion()).as("check exposicion").isEqualTo(actual.getExposicion()))
-;    }
+            .satisfies(e -> assertThat(e.getnPuertas()).as("check nPuertas").isEqualTo(actual.getnPuertas()))
+            .satisfies(e -> assertThat(e.getMotor()).as("check motor").isEqualTo(actual.getMotor()))
+            .satisfies(e -> assertThat(e.getMatricula()).as("check matricula").isEqualTo(actual.getMatricula()));
+    }
 
     /**
      * Asserts that the entity has all the updatable relationships set.

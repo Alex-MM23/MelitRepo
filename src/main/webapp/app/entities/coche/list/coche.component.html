@@ -31,6 +31,7 @@
   }
 
   @if (coches && coches.length > 0) {
+    <jhi-component-search (sendSearch)="callSearchComponent($event)"></jhi-component-search>
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
@@ -72,14 +73,28 @@
             </th>
             <th scope="col" jhiSortBy="nPuertas">
               <div class="d-flex">
-                <span jhiTranslate="appApp.coche.nPuertas">Puertas</span>
+                <span jhiTranslate="appApp.coche.nPuertas">N Puertas</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="motor">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.coche.motor">Motor</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="matricula">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.coche.matricula">Matricula</span>
+
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="marca.id">
               <div class="d-flex">
-                <span jhiTranslate="appApp.modelo.marca">Marca</span>
-
+                <span jhiTranslate="appApp.coche.marca">Marca</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -89,40 +104,72 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span>Año</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span>Pegatina</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span>Cada cuantos años ITV</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          @for (coche of coches; track trackId) {
-            <tr data-cy="entityTable">
-              <td>
+          @for (coche of cochesFiltered; track trackId) {
+            <tr data-cy="entityTable" [ngClass]="{ 'bg-mal': !coche.exposicion, 'bg-bien': coche.exposicion}">              <td>
                 <a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a>
               </td>
               <td>{{ coche.color }}</td>
               <td>{{ coche.numeroSerie }}</td>
               <td>{{ coche.precio }}</td>
               <td>{{ coche.exposicion }}</td>
-              <td>{{ coche.npuertas }}</td>              
+              <td>{{ coche.nPuertas }}</td>
+              <td jhiTranslate="{{ 'appApp.motor.' + coche.motor }}">{{ coche.motor }}</td>
+              <td>{{ coche.matricula }}</td>
               <td>
                 @if (coche.marca) {
                   <div>
-                    <a [routerLink]="['/marca', coche.marca.id, 'view']">{{ coche.marca.id }}</a>
+                    <a [routerLink]="['/marca', coche.marca.id, 'view']">{{ coche.marca.nombre }}</a>
                   </div>
                 }
               </td>
               <td>
                 @if (coche.modelo) {
                   <div>
-                    <a [routerLink]="['/modelo', coche.modelo.id, 'view']">{{ coche.modelo.id }}</a>
+                    <a [routerLink]="['/modelo', coche.modelo.id, 'view']">{{ coche.modelo.nombre }}</a>
                   </div>
                 }
               </td>
-              <td class="text-end">
-                <div class="btn-group">
-                  <a [routerLink]="['/coche', coche.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                    <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
-                  </a>
+              @if(coche.anio != null){
+                <td>{{ coche.anio }}</td>
+              }@else{
+                <td>El vehículo no existe</td>
+              }
+              <td [ngClass]="{
+                'bg-etiqueta-c': coche.pegatina === 'C',
+                'bg-etiqueta-b': coche.pegatina === 'B',
+                'bg-etiqueta-0': coche.pegatina === '0'
+              }">
+              {{ coche.pegatina }}
+            </td>
+            <td>{{ coche.itv }}</td>
+            <td class="text-end">
+              <div class="btn-group">
+                <a [routerLink]="['/coche', coche.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+                </a>
 
                   <a [routerLink]="['/coche', coche.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>

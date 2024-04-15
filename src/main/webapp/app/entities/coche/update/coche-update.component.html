@@ -48,9 +48,25 @@
             formControlName="exposicion"
           />
         </div>
+
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="appApp.coche.nPuertas" for="field_npuertas">Puertas</label>
-          <input type="number" class="form-control" name="npuertas" id="field_npuertas" data-cy="npuertas" formControlName="npuertas"/>
+          <label class="form-label" jhiTranslate="appApp.coche.nPuertas" for="field_nPuertas">N Puertas</label>
+          <input type="number" class="form-control" name="nPuertas" id="field_nPuertas" data-cy="nPuertas" formControlName="nPuertas" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.coche.motor" for="field_motor">Motor</label>
+          <select class="form-control" name="motor" formControlName="motor" id="field_motor" data-cy="motor">
+            <option [ngValue]="null">{{ 'appApp.motor.null' | translate }}</option>
+            @for (motor of motorValues; track $index) {
+              <option [value]="motor">{{ 'appApp.motor.' + motor | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.coche.matricula" for="field_matricula">Matricula</label>
+          <input type="text" class="form-control" name="matricula" id="field_matricula" data-cy="matricula" formControlName="matricula" required pattern="\d{4}\s?(?!.*(A|E|U|I|O|Q|Ñ))[A-Z]{3}"/>
         </div>
 
         <div class="mb-3">

@@ -130,8 +130,14 @@ public class CocheResource {
                 if (coche.getExposicion() != null) {
                     existingCoche.setExposicion(coche.getExposicion());
                 }
-                if(coche.getNPuertas() != null) {
-                    existingCoche.setNPuertas(coche.getNPuertas());
+                if (coche.getnPuertas() != null) {
+                    existingCoche.setnPuertas(coche.getnPuertas());
+                }
+                if (coche.getMotor() != null) {
+                    existingCoche.setMotor(coche.getMotor());
+                }
+                if (coche.getMatricula() != null) {
+                    existingCoche.setMatricula(coche.getMatricula());
                 }
 
                 return existingCoche;
@@ -157,8 +163,17 @@ public class CocheResource {
             return StreamSupport.stream(cocheRepository.findAll().spliterator(), false).filter(coche -> coche.getVenta() == null).toList();
         }
         log.debug("REST request to get all Coches");
-        log.debug(cocheRepository.findAll().toString() + "coches");
-        return cocheRepository.findAll();
+        List<Coche> auxCoches = cocheRepository.findAll();
+        
+        for (Coche coche : auxCoches) {
+            if(coche.getMarca() != null){
+                coche.getMarca().getNombre();
+            }
+            if(coche.getModelo() != null){
+                coche.getModelo().getNombre();
+            }
+        }
+        return auxCoches;
     }
 
     /**
