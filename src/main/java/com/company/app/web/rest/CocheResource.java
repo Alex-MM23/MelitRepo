@@ -173,7 +173,6 @@ public class CocheResource {
                 coche.getModelo().getNombre();
             }
         }
-
         return auxCoches;
     }
 

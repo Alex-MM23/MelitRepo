@@ -41,10 +41,30 @@ export class CocheComponent implements OnInit {
 
   sortState = sortStateSignal({});
 
-  callSearchComponent(data: ICoche[], textSearch: String): void {
-    const result= ComponentSearchComponent.validarSearch(data, textSearch);
-    if (result) {
-      this.cochesFiltered.push(result);
+  protected callSearchComponent(filtrado: string): void {
+    if(filtrado !== '' && filtrado !== null && this.coches !== undefined){
+      this.cochesFiltered = this.coches.filter(coche => {
+        for (const column in coche) {
+          if(typeof (coche as any)[column] != 'object'){
+            if ((coche as any)[column]?.toString().toLowerCase().includes(filtrado)) {
+              return true;
+            }
+          }
+          if(typeof (coche as any)[column] == 'object'){
+            for (const column2 in (coche as any)[column]) {
+              if ((coche as any)[column][column2]?.toString().toLowerCase().includes(filtrado)) {
+                return true;
+              }
+            }
+
+          }
+        }
+        return false;
+      });
+    }else{
+      if(this.coches !== undefined){
+        this.cochesFiltered = this.coches;
+      }
     }
   }
 
@@ -101,6 +121,7 @@ export class CocheComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.coches = this.refineData(dataFromBody);
+    this.cochesFiltered = this.coches;
     //console.log(this.searchText);
   }
 
@@ -119,27 +140,6 @@ export class CocheComponent implements OnInit {
     }
 
     return predicate && order ? data.sort(this.sortService.startSort({ predicate, order })) : data;
-  }
-
-  protected buscadorCoche(coche: ICoche): boolean {
-    let blnBadera = true;
-    console.log("Coche:" + coche);
-    if(this.searchText != ''){
-      for (const campoCoche in coche) {
-        console.log(campoCoche);
-        if(campoCoche != null){
-            let fieldValue = campoCoche;
-            if(typeof fieldValue === 'string'){
-              fieldValue = fieldValue.toLowerCase();
-            }
-            if(fieldValue.includes(this.searchText)){
-              blnBadera = false;
-              break;
-            }
-        }
-      }
-    }
-    return blnBadera;
   }
 
   protected itv (anio: number): number | string {
