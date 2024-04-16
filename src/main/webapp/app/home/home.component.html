@@ -79,6 +79,7 @@
       >!
     </p>
   </div>
-  <input type="text" [(ngModel)]="textoEjemplo">
+  <input class="btn" type="text" [(ngModel)]="textoEjemplo">
+  <button type="button" (click)="ngOpenEncuesta()">Abrir panel</button>
   <jhi-prueba [texto]="textoEjemplo" (sendText)="textoEjemplo = $event"></jhi-prueba>
 </div>

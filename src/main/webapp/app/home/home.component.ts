@@ -8,13 +8,15 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { PruebaComponent } from "../layouts/prueba/prueba.component";
 import { FormsModule } from '@angular/forms';
+import { EncuestaComponent } from 'app/encuesta/encuesta.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     standalone: true,
     selector: 'jhi-home',
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
-    imports: [SharedModule, RouterModule, PruebaComponent, FormsModule]
+    imports: [SharedModule, RouterModule, PruebaComponent, FormsModule, EncuestaComponent]
 })
 export default class HomeComponent implements OnInit, OnDestroy {
   account = signal<Account | null>(null);
@@ -22,6 +24,7 @@ export default class HomeComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
 
+  private modalService = inject(NgbModal);
   private accountService = inject(AccountService);
   private router = inject(Router);
 
@@ -39,5 +42,10 @@ export default class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  ngOpenEncuesta(): void {
+    this.modalService
+     .open(EncuestaComponent, { size: 'lg' })
   }
 }
