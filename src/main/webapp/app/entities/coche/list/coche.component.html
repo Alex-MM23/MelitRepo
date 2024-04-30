@@ -92,6 +92,20 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="fecha_llegada">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.coche.fecha_llegada">Fecha Llegada</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fecha_venta">
+              <div class="d-flex">
+                <span jhiTranslate="appApp.coche.fecha_venta">Fecha Venta</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col" jhiSortBy="marca.id">
               <div class="d-flex">
                 <span jhiTranslate="appApp.coche.marca">Marca</span>
@@ -137,6 +151,8 @@
               <td>{{ coche.nPuertas }}</td>
               <td jhiTranslate="{{ 'appApp.motor.' + coche.motor }}">{{ coche.motor }}</td>
               <td>{{ coche.matricula }}</td>
+              <td>{{ coche.fecha_llegada }}</td>
+              <td>{{ coche.fecha_venta }}</td>
               <td>
                 @if (coche.marca) {
                   <div>

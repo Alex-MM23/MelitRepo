@@ -27,7 +27,9 @@
       "matricula": "Matricula",
       "marca": "Marca",
       "modelo": "Modelo",
-      "venta": "Venta"
+      "venta": "Venta",
+      "fecha_venta": "Fecha Venta",
+      "fecha_llegada": "Fecha Llegada"
     }
   }
 }

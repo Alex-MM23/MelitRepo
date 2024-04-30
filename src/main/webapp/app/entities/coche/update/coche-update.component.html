@@ -70,6 +70,16 @@
         </div>
 
         <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.coche.fecha_llegada" for="field_fecha_llegada">Fecha Llegada</label>
+          <input type="text" class="form-control" name="fecha_llegada" id="field_fecha_llegada" data-cy="fecha_llegada" formControlName="fecha_llegada">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="appApp.coche.fecha_venta" for="field_fecha_venta">Fecha Venta</label>
+          <input type="text" class="form-control" name="fecha_venta" id="field_fecha_venta" data-cy="fecha_venta" formControlName="fecha_venta">
+        </div>
+
+        <div class="mb-3">
           <label class="form-label" jhiTranslate="appApp.coche.marca" for="field_marca">Marca</label>
           <select class="form-control" id="field_marca" data-cy="marca" name="marca" formControlName="marca" [compareWith]="compareMarca">
             <option [ngValue]="null"></option>

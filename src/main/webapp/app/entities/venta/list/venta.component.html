@@ -2,6 +2,12 @@
   <h2 id="page-heading" data-cy="VentaHeading">
     <span jhiTranslate="appApp.venta.home.title">Ventas</span>
 
+    <!-- <select [(ngModel)]="idClienteSelecionado" (ngModelChange)="findVentaByClienteId()">
+      @for (cliente of clientes; track $index) {
+      <option [value]="cliente.id">{{cliente.nombre}}</option>
+      }
+    </select>  -->
+
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>

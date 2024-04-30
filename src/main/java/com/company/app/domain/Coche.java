@@ -4,6 +4,7 @@ import com.company.app.domain.enumeration.motor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 
 /**
  * A Coche.
@@ -41,6 +42,12 @@ public class Coche implements Serializable {
 
     @Column(name = "matricula")
     private String matricula;
+
+    @Column(name = "fecha_llegada")
+    private Instant fecha_llegada;
+
+    @Column(name = "fecha_venta")
+    private Instant fecha_venta;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "marcas", "modelos" }, allowSetters = true)
@@ -177,6 +184,22 @@ public class Coche implements Serializable {
         return this.modelo;
     }
 
+    public Instant getFecha_llegada() {
+        return fecha_llegada;
+    }
+
+    public void setFecha_llegada(Instant fecha_llegada) {
+        this.fecha_llegada = fecha_llegada;
+    }
+
+    public Instant getFecha_venta() {
+        return fecha_venta;
+    }
+
+    public void setFecha_venta(Instant fecha_venta) {
+        this.fecha_venta = fecha_venta;
+    }
+
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
@@ -236,6 +259,8 @@ public class Coche implements Serializable {
             ", nPuertas=" + getnPuertas() +
             ", motor='" + getMotor() + "'" +
             ", matricula='" + getMatricula() + "'" +
+            ", fechaLlegada='" + getFecha_llegada() + "'" +
+            ", fechaVenta='" + getFecha_venta() + "'" +
             "}";
     }
 }

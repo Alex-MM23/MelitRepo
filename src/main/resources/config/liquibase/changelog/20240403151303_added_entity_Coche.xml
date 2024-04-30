@@ -29,6 +29,12 @@
             <column name="n_puertas" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="fecha_llegada" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+            <column name="fecha_venta" type="timestamp">
+                <constraints nullable="true" />
+            </column>
             <column name="motor" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
